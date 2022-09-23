@@ -25,10 +25,10 @@ df_36 = df["landmass"].isin([3,6])
 print(df.groupby('landmass')[var].mean())
 
 #Create labels for only Europe and Oceania
-labels = None
+labels = (df["landmass"].isin([3,6]))*1
 
 #Print the variable types for the predictors
-
+print(df_36[var].dtypes)
 
 #Create dummy variables for categorical predictors
 data = pd.get_dummies(None)
