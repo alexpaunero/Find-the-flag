@@ -19,7 +19,7 @@ var = [ 'red', 'green', 'blue','gold', 'white', 'black', 'orange', 'mainhue','ba
 print(df.landmass.value_counts())
 
 #Create a new dataframe with only flags from Europe and Oceania
-df_36 = None
+df_36 = df["landmass"].isin([3,6])
 
 #Print the average vales of the predictors for Europe and Oceania
 print(None)
