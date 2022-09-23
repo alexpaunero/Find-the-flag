@@ -19,7 +19,7 @@ var = [ 'red', 'green', 'blue','gold', 'white', 'black', 'orange', 'mainhue','ba
 print(df.landmass.value_counts())
 
 #Create a new dataframe with only flags from Europe and Oceania
-df_36 = df["landmass"].isin([3,6])
+df_36 = df[(df["landmass"].isin([3,6]))]
 
 #Print the average vales of the predictors for Europe and Oceania
 print(df.groupby('landmass')[var].mean())
@@ -29,13 +29,16 @@ labels = (df["landmass"].isin([3,6]))*1
 
 #Print the variable types for the predictors
 print(df_36[var].dtypes)
+print(labels.head())
 
 #Create dummy variables for categorical predictors
 data = pd.get_dummies(df[var])
-
+print(data.head())
 
 #Split data into a train and test set
-
+X = data
+y = labels
+#X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=1, test_size=.4)
 
 #Fit a decision tree for max_depth values 1-20; save the accuracy score in acc_depth
 depths = range(1, 21)
