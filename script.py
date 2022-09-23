@@ -22,7 +22,7 @@ print(df.landmass.value_counts())
 df_36 = df["landmass"].isin([3,6])
 
 #Print the average vales of the predictors for Europe and Oceania
-print(None)
+print(df.groupby('landmass')[var].mean())
 
 #Create labels for only Europe and Oceania
 labels = None
