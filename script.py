@@ -31,7 +31,8 @@ labels = (df["landmass"].isin([3,6]))*1
 print(df_36[var].dtypes)
 
 #Create dummy variables for categorical predictors
-data = pd.get_dummies(None)
+data = pd.get_dummies(df[var])
+
 
 #Split data into a train and test set
 
