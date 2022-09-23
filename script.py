@@ -44,9 +44,9 @@ X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=1, test_si
 depths = range(1, 21)
 acc_depth = []
 for i in depths:
-  tree = DecisionTreeClassifier(random_state = 1, max_depth = i)
-  tree.fit(X_train, y_train)
-  score = tree.score(X_test, y_test)
+  dtc = DecisionTreeClassifier(random_state = 1, max_depth = i)
+  dtc.fit(X_train, y_train)
+  score = dtc.score(X_test, y_test)
   acc_depth.append(score)
   print(i, score)
 
@@ -55,10 +55,14 @@ plt.plot(depths, acc_depth)
 plt.show()
 
 #Find the largest accuracy and the depth this occurs
-
+max_acc = np.max(acc_depth)
+print(max_acc)
 
 #Refit decision tree model with the highest accuracy and plot the decision tree
-
+dtc = DecisionTreeClassifier(random_state = 1, max_depth = 4)
+dtc.fit(X_train, y_train)
+tree.plot_tree(dtc, filled = True)
+plt.show()
 
 #Create a new list for the accuracy values of a pruned decision tree.  Loop through
 #the values of ccp and append the scores to the list
