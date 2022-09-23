@@ -56,7 +56,9 @@ plt.show()
 
 #Find the largest accuracy and the depth this occurs
 max_acc = np.max(acc_depth)
-print(max_acc)
+print("Max score: " + str(max_acc))
+top_depth = acc_depth.index(max_acc) + 1
+print("Max depth: " + str(top_depth))
 
 #Refit decision tree model with the highest accuracy and plot the decision tree
 dtc = DecisionTreeClassifier(random_state = 1, max_depth = 4)
@@ -66,15 +68,36 @@ plt.show()
 
 #Create a new list for the accuracy values of a pruned decision tree.  Loop through
 #the values of ccp and append the scores to the list
+clf = DecisionTreeClassifier(random_state=0)
+path = clf.cost_complexity_pruning_path(X_train, y_train)
+ccp_alphas, impurities = path.ccp_alphas, path.impurities
 
+print(ccp_alphas)
+acc_pruned = []
+for ccp in ccp_alphas:
+  dtc = DecisionTreeClassifier(random_state = 1, ccp_alpha = ccp)
+  dtc.fit(X_train, y_train)
+  score = dtc.score(X_test, y_test)
+  acc_pruned.append(score)
+  print(ccp, score)
 
 #Plot the accuracy vs ccp_alpha
-
+plt.clf()
+plt.plot(ccp_alphas, acc_pruned)
+plt.show()
 
 #Find the largest accuracy and the ccp value this occurs
-
+max_score = np.max(acc_pruned)
+print("Max score: " + str(max_score))
+top_ccp_index = acc_depth.index(max_score)
+top_ccp = ccp_alphas[top_ccp_index]
+print("Max ccp: " + str(top_ccp))
 
 #Fit a decision tree model with the values for max_depth and ccp_alpha found above
-
+dtc = DecisionTreeClassifier(random_state = 1, max_depth = top_depth, ccp_alpha = top_ccp)
+dtc.fit(X_train, y_train)
+print(dtc.score(X_test, y_test))
 
 #Plot the final decision tree
+tree.plot_tree(dtc, filled = True)
+plt.show()
