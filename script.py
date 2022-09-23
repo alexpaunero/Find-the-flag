@@ -16,7 +16,7 @@ df= pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/flags
 var = [ 'red', 'green', 'blue','gold', 'white', 'black', 'orange', 'mainhue','bars','stripes', 'circles','crosses', 'saltires','quarters','sunstars','triangle','animate']
 
 #Print number of countries by landmass, or continent
-print(None)
+print(df.landmass.value_counts())
 
 #Create a new dataframe with only flags from Europe and Oceania
 df_36 = None
