@@ -38,15 +38,21 @@ print(data.head())
 #Split data into a train and test set
 X = data
 y = labels
-#X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=1, test_size=.4)
+X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=1, test_size=.4)
 
 #Fit a decision tree for max_depth values 1-20; save the accuracy score in acc_depth
 depths = range(1, 21)
 acc_depth = []
-
+for i in depths:
+  tree = DecisionTreeClassifier(random_state = 1, max_depth = i)
+  tree.fit(X_train, y_train)
+  score = tree.score(X_test, y_test)
+  acc_depth.append(score)
+  print(i, score)
 
 #Plot the accuracy vs depth
-
+plt.plot(depths, acc_depth)
+plt.show()
 
 #Find the largest accuracy and the depth this occurs
 
